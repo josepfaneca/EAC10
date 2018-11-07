@@ -9,7 +9,7 @@ import vista.DestiLlista;
 import vista.MenuDestiVista;
 
 /**
- *
+ * MVC
  * @author FTA
  */
 public class ControladorDesti implements ActionListener {
