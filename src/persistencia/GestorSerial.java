@@ -1,6 +1,6 @@
 package persistencia;
 
-import principal.GestioExcursionsExcepcio;
+import excepcions.GestioExcursionsExcepcio;
 import model.Desti;
 
 /**

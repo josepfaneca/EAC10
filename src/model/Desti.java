@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import principal.Component;
 import static principal.Component.DADES;
-import principal.GestioExcursionsExcepcio;
+import excepcions.GestioExcursionsExcepcio;
 
 /**
  *

@@ -4,6 +4,7 @@
  */
 package principal;
 
+import excepcions.GestioExcursionsExcepcio;
 import model.Guia;
 import model.VisitaLliure;
 import model.VisitaPagament;
