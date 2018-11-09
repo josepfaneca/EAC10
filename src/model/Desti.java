@@ -10,12 +10,13 @@ import java.util.List;
 import principal.Component;
 import static principal.Component.DADES;
 import excepcions.GestioExcursionsExcepcio;
+import java.io.Serializable;
 
 /**
  *
  * @author FTA
  */
-public class Desti implements Component {
+public class Desti implements Component, Serializable {
 
     private int codi;
     private static int properCodi = 1; //El proper codi a assignar

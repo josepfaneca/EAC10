@@ -37,7 +37,6 @@ public class DestiLlista {
        
     }
 
-
     public JFrame getFrame() {
         return frame;
     }

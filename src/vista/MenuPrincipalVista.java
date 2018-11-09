@@ -1,5 +1,6 @@
 package vista;
 
+import com.sun.javafx.scene.control.skin.MenuButtonSkin;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -12,6 +13,8 @@ public class MenuPrincipalVista {
     private JFrame frame;
 
     private JButton[] menuButtons = new JButton[3];
+    
+    
 
     private final int AMPLADA = 800;
     private final int ALCADA = 600;
@@ -35,6 +38,8 @@ public class MenuPrincipalVista {
         */ 
         
     }
+    
+    
 
     public JFrame getFrame() {
         return frame;
@@ -51,4 +56,6 @@ public class MenuPrincipalVista {
     public void setMenuButtons(JButton[] menuButtons) {
         this.menuButtons = menuButtons;
     }
+    
+    
 }

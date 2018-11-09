@@ -28,6 +28,8 @@ public class GestorSerial implements ProveedorPersistencia{
          *
          *Retorn: cap
          */
+        
+        
 
     }
 
