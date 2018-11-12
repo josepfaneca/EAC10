@@ -112,6 +112,7 @@ public class Desti implements Component, Serializable {
         return new Desti(nom, continent);
     }
 
+    @Override
     public void updateComponent() {
 
         System.out.println("\nNom del destí: " + nom);
@@ -122,6 +123,7 @@ public class Desti implements Component, Serializable {
         continent = DADES.next();
     }
 
+    @Override
     public void showComponent() {
         System.out.println("\nLes dades del destí amb codi " + codi + " són:");
         System.out.println("\nNom:" + nom);
