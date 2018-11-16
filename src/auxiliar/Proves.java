@@ -5,6 +5,7 @@
  */
 package auxiliar;
 
+import controlador.ControladorDesti;
 import controlador.ControladorPrincipal;
 import java.awt.GridLayout;
 import javax.swing.JButton;
@@ -19,14 +20,14 @@ import vista.MenuPrincipalVista;
  */
 public class Proves {
 
-    public static JButton[] menuButtons = new JButton[7];
     private static final int AMPLADA = 800;
     private static final int ALCADA = 600;
-    private static final JFrame FRAME = new JFrame("");
-    
-    static JFrame MenuPrincipalVista1(JFrame frame) {
 
-        frame = new JFrame("Menú Destí");
+    public JFrame MenuPrincipalVista1() {
+        JButton[] menuButtons = new JButton[7];
+
+
+        JFrame frame = new JFrame("Menú Destí");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new GridLayout(0, 1));
         menuButtons[0] = new JButton("0. Sortir");
@@ -49,9 +50,10 @@ public class Proves {
         return frame;
 
     }
-    
-    static JFrame MenuDestiVista1 (JFrame frame){
-        frame = new JFrame("Menú Principal");
+
+    public JFrame MenuDestiVista1 (){
+        JButton[] menuButtons = new JButton[3];
+        JFrame frame = new JFrame("Menú Principal");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new GridLayout(0,1));
         menuButtons[0] = new JButton("0. Sortir");
@@ -69,11 +71,12 @@ public class Proves {
 //        JFrame miFrame = MenuPrincipalVista1(FRAME);
 //        JFrame miFrame2 = MenuDestiVista1(FRAME);
 //        MenuPrincipalVista MenuPrincipalVista = new MenuPrincipalVista(); 
-//        DestiLlista destiLlista = new DestiLlista();
+        DestiLlista destiLlista = new DestiLlista();
 //        DestiForm destiform = new DestiForm();
 //        ControladorPrincipal controladorPrincipal = new ControladorPrincipal();
-        
-        
+        //ControladorDesti controladorDesti = new ControladorDesti();
+
+
     }
 
 }

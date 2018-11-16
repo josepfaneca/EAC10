@@ -3,7 +3,6 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.Desti;
 import vista.DestiForm;
@@ -106,27 +105,26 @@ public class ControladorDesti implements ActionListener {
         També, heu d'actualitzar la propietat opcioSelec 
         * (amb l'opció que ha premut l'usuari)
          */
-        Desti[] listDestins = new Desti[ControladorPrincipal.getMAXDESTINS()];
-        String str = e.getActionCommand();
-        if (str.equals(menuDestiVista.getMenuButtons()[0].getName())) {
+        //Desti[] listDestins = new Desti[ControladorPrincipal.getMAXDESTINS()];
+        if (e.getSource() == menuDestiVista.getMenuButtons()[0]) {
             bifurcaOpcio(0);
             opcioSelec = 0;
-        } else if (str.equals(menuDestiVista.getMenuButtons()[1].getName())) {
+        } else if (e.getSource() ==menuDestiVista.getMenuButtons()[1]) {
             bifurcaOpcio(1);
             opcioSelec = 1;
-        } else if (str.equals(menuDestiVista.getMenuButtons()[2].getName())) {
+        } else if (e.getSource() == menuDestiVista.getMenuButtons()[2]) {
             bifurcaOpcio(2);
             opcioSelec = 2;
-        } else if (str.equals(menuDestiVista.getMenuButtons()[3].getName())) {
+        } else if (e.getSource() == menuDestiVista.getMenuButtons()[3]) {
             bifurcaOpcio(3);
             opcioSelec = 3;
-        } else if (str.equals(menuDestiVista.getMenuButtons()[4].getName())) {
+        } else if (e.getSource() == menuDestiVista.getMenuButtons()[4]) {
             bifurcaOpcio(4);
             opcioSelec = 4;
-        } else if (str.equals(menuDestiVista.getMenuButtons()[5].getName())) {
+        } else if (e.getSource() == menuDestiVista.getMenuButtons()[5]) {
             bifurcaOpcio(5);
             opcioSelec = 5;
-        } else if (str.equals(menuDestiVista.getMenuButtons()[6].getName())) {
+        } else if (e.getSource() == menuDestiVista.getMenuButtons()[6]) {
             bifurcaOpcio(6);
             opcioSelec = 6;
         }
@@ -152,26 +150,41 @@ public class ControladorDesti implements ActionListener {
                 (penseu que és el destiActual de ControladorPrincipal)
          */
         if (destiForm != null) {
-            if (str.equals(destiForm.getbDesar().getName())) {
+            if (e.getSource() == destiForm.getbDesar()) {
                 if (opcioSelec == 1) {
                     //Es crea un nou objecte Desti amb les dades del formulari
-                    Desti nouDesti = new Desti(destiForm.gettNom().toString(),
-                    destiForm.gettContinent().toString());
+                    Desti nouDesti = new Desti(destiForm.gettNom().getText(),
+                    destiForm.gettContinent().getText());
                     //S'afegeix el destí creat a la llista de ControladorPrincipal
-                    listDestins[ControladorPrincipal.getPosicioDestins()] = nouDesti;
-                    ControladorPrincipal.setDestins(listDestins);
+                    ControladorPrincipal.getDestins()[ControladorPrincipal.getPosicioDestins()] = nouDesti;
                     //Es posa aquest destí com destiActual
-                    ControladorPrincipal.setDestiActual(nouDesti);
+                    ControladorPrincipal.setDestiActual(ControladorPrincipal.getDestins()[ControladorPrincipal.getPosicioDestins()]);
+                    //avanço a la següent posició de l'array destins de ControladorPrincipal
                     ControladorPrincipal.setPosicioDestins();
                     //es canvia l'atribut a opcioSelect a 2
                     opcioSelec = 2;
+                    //mostrar un missatge SEGONS ELS REQUERIMENTS NO S'HA D'IMPLEMENTAR CAP MISSATGE
+                    destiForm.getFrame().setVisible(true);
+                    JOptionPane.showMessageDialog(destiForm.getFrame(),"S'ha creat un nou desti amb nom: "+destiForm.gettNom().getText());
+                    destiForm.getFrame().setVisible(false);
+
                 } else if (opcioSelec == 3) {
                     //Es crea un nou objecte Desti amb les dades del formulari
-                    Desti nouDesti = new Desti(destiForm.gettNom().toString(),
-                    destiForm.gettContinent().toString());
+                    Desti nouDesti = new Desti(destiForm.gettNom().getText(),
+                    destiForm.gettContinent().getText());
                     //Es modifica l'objecte destí amb les dades del formulari
                     //és el destiActual de ControladorPrincipal
-                    ControladorPrincipal.setDestiActual(nouDesti);
+                    int posiDestiMod=0;
+                    //cercar la posició del Destí a modificar en l'array de ControladorPrincipal
+                    for (int i=0; i<ControladorPrincipal.getDestins().length; i++) {
+                        if (ControladorPrincipal.getDestiActual().equals(ControladorPrincipal.getDestins()[i])){
+                            posiDestiMod = i;
+                            i = ControladorPrincipal.getDestins().length;//sortir del bucle
+                        }
+                    }
+                    //modificar el Destí de l'array de ControladorPrincipal seleccionat
+                    ControladorPrincipal.getDestins()[posiDestiMod] = nouDesti;
+                    ControladorPrincipal.setDestiActual(ControladorPrincipal.getDestins()[posiDestiMod]);
                 }
             }
             /*
@@ -180,13 +193,24 @@ public class ControladorDesti implements ActionListener {
             de destins, llavors
             Heu de tornar al menú de destí (i amagar el formulari)
             */
-            if (str.equals(destiForm.getbSortir().getName())) {
+            if (e.getSource() == destiForm.getbSortir()) {
                 destiForm.getFrame().dispose();
                 menuDestiVista.getFrame().setVisible(true);
             }
-
         }
-
+        /*
+        Accions per a la llista de destins:
+        ---- SORTIR ----
+        Si el botó premut per l'usuari és el botó de sortir de la llista 
+        de destins, llavors
+        Heu de tornar al menú de destins (i amagar la llista)
+        */
+        if (destiLlista != null) {
+            if (e.getSource() == destiLlista.getbSortir()){
+                destiLlista.getFrame().dispose();
+                menuDestiVista.getFrame().setVisible(true);
+            }
+        }
     }
 
     private void bifurcaOpcio(Integer opcio) {
@@ -240,7 +264,6 @@ public class ControladorDesti implements ActionListener {
             case 5: //carregar
                 /*
             TODO
-                
             Es mostra un dialog (JOptionPane.showOptionDialog) amb botons, on cadascun d'ells és un mètode de càrrega 
             (propietat a Controlador Principal: ara XML i Serial)
             Un cop seleccionat el mètode, amb un altre dialog, es demana el codi del destí a carregar 
@@ -257,9 +280,7 @@ public class ControladorDesti implements ActionListener {
                 Si no existeix,
                     S'afegeix el nouDesti al vector de destins a la darrera posició
                     Es mostra un missatge confirmant l'addició (JOptionPane.showMessageDialog)
-            
                  */
-
                 break;
 
             case 6: //desar
@@ -272,6 +293,18 @@ public class ControladorDesti implements ActionListener {
                     (propietat a Controlador Principal: ara XML i Serial)
                     Un cop escollit el mètode, es desa el destí cridant a desarDesti del gestor de persistència
                  */
+                //http://chuwiki.chuidiang.org/index.php?title=JOptionPane_y_di%C3%A1logos_modales#JOptionPane.showOptionDialog.28.29
+                if (ControladorPrincipal.getDestiActual()!= null) {
+                    int seleccio = (int) JOptionPane.showOptionDialog(menuDestiVista.getFrame(),"Selecciona un mètode","Desar destí",
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
+                            null,new Object[]{"XML","Serial"},"XML");//opció 0 o 1
+                   
+                    
+                    
+                } else {
+                    menuDestiVista.getFrame().setVisible(true);
+                    JOptionPane.showMessageDialog(menuDestiVista.getFrame(), "Abans s'ha de seleccionar un destí");
+                }
 
                 break;
 

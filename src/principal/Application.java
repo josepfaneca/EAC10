@@ -150,7 +150,7 @@ public class Application {
                     posicioDestins = 0;
                     destins = new Desti[1];
                     gp.carregarDesti("XML", FITXER);
-                    destins[posicioDestins] = gp.getGestor().getDesti();
+                    //destins[posicioDestins] = gp.getGestor().getDesti();
                     posicioDestins++;
                     break;
                 case 6: //Desar destí

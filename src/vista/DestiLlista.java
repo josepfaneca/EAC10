@@ -1,10 +1,15 @@
 package vista;
 
+import com.sun.javafx.scene.control.skin.TableColumnHeader;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -35,12 +40,15 @@ public class DestiLlista {
      * http://camposha.info/source/java-jtable-button-column
      */
     public DestiLlista() {
-        DestiTableModel model = new DestiTableModel();
+        DestiTableModel modelTaula = new DestiTableModel();
+        modelTaula.getValueAt(0, 0);
+        modelTaula.getColumnName(1);
         frame = new JFrame("Llista de destins");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new GridLayout(0, 1));
-        tDesti = new JTable(model);
+        tDesti = new JTable(modelTaula);
         frame.add(tDesti);
+        frame.add(new JScrollPane(tDesti));
         bSortir = new JButton("Sortir");
         frame.add(bSortir);
         frame.setSize(AMPLADA, ALCADA);

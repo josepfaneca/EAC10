@@ -25,7 +25,6 @@ public class DestiTableModel extends AbstractTableModel{
             }
         }
     }
-
     @Override
     public int getRowCount() {
         return data.length;
