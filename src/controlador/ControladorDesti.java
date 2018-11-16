@@ -1,10 +1,14 @@
 package controlador;
 
+import excepcions.GestioExcursionsExcepcio;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import model.Desti;
+import persistencia.GestorPersistencia;
 import vista.DestiForm;
 import vista.DestiLlista;
 import vista.MenuDestiVista;
@@ -107,25 +111,53 @@ public class ControladorDesti implements ActionListener {
          */
         //Desti[] listDestins = new Desti[ControladorPrincipal.getMAXDESTINS()];
         if (e.getSource() == menuDestiVista.getMenuButtons()[0]) {
-            bifurcaOpcio(0);
+            try {
+                bifurcaOpcio(0);
+            } catch (GestioExcursionsExcepcio ex) {
+                Logger.getLogger(ControladorDesti.class.getName()).log(Level.SEVERE, null, ex);
+            }
             opcioSelec = 0;
         } else if (e.getSource() ==menuDestiVista.getMenuButtons()[1]) {
-            bifurcaOpcio(1);
+            try {
+                bifurcaOpcio(1);
+            } catch (GestioExcursionsExcepcio ex) {
+                Logger.getLogger(ControladorDesti.class.getName()).log(Level.SEVERE, null, ex);
+            }
             opcioSelec = 1;
         } else if (e.getSource() == menuDestiVista.getMenuButtons()[2]) {
-            bifurcaOpcio(2);
+            try {
+                bifurcaOpcio(2);
+            } catch (GestioExcursionsExcepcio ex) {
+                Logger.getLogger(ControladorDesti.class.getName()).log(Level.SEVERE, null, ex);
+            }
             opcioSelec = 2;
         } else if (e.getSource() == menuDestiVista.getMenuButtons()[3]) {
-            bifurcaOpcio(3);
+            try {
+                bifurcaOpcio(3);
+            } catch (GestioExcursionsExcepcio ex) {
+                Logger.getLogger(ControladorDesti.class.getName()).log(Level.SEVERE, null, ex);
+            }
             opcioSelec = 3;
         } else if (e.getSource() == menuDestiVista.getMenuButtons()[4]) {
-            bifurcaOpcio(4);
+            try {
+                bifurcaOpcio(4);
+            } catch (GestioExcursionsExcepcio ex) {
+                Logger.getLogger(ControladorDesti.class.getName()).log(Level.SEVERE, null, ex);
+            }
             opcioSelec = 4;
         } else if (e.getSource() == menuDestiVista.getMenuButtons()[5]) {
-            bifurcaOpcio(5);
+            try {
+                bifurcaOpcio(5);
+            } catch (GestioExcursionsExcepcio ex) {
+                Logger.getLogger(ControladorDesti.class.getName()).log(Level.SEVERE, null, ex);
+            }
             opcioSelec = 5;
         } else if (e.getSource() == menuDestiVista.getMenuButtons()[6]) {
-            bifurcaOpcio(6);
+            try {
+                bifurcaOpcio(6);
+            } catch (GestioExcursionsExcepcio ex) {
+                Logger.getLogger(ControladorDesti.class.getName()).log(Level.SEVERE, null, ex);
+            }
             opcioSelec = 6;
         }
         /*
@@ -213,7 +245,7 @@ public class ControladorDesti implements ActionListener {
         }
     }
 
-    private void bifurcaOpcio(Integer opcio) {
+    private void bifurcaOpcio(Integer opcio) throws GestioExcursionsExcepcio {
 
         switch (opcio) {
             case 0: //sortir
@@ -286,7 +318,6 @@ public class ControladorDesti implements ActionListener {
             case 6: //desar
                 /*
                 TODO
-                
                 Es comprova si s'ha seleccionat el destí, mostrant, si correspon, missatges d'error (JOptionPane.showMessageDialog)
                 Si s'ha sseleccionat el destí, 
                     Es mostra un dialog (JOptionPane.showOptionDialog) amb botons, on cadascun d'ells és un mètode de càrrega
@@ -294,24 +325,40 @@ public class ControladorDesti implements ActionListener {
                     Un cop escollit el mètode, es desa el destí cridant a desarDesti del gestor de persistència
                  */
                 //http://chuwiki.chuidiang.org/index.php?title=JOptionPane_y_di%C3%A1logos_modales#JOptionPane.showOptionDialog.28.29
-                if (ControladorPrincipal.getDestiActual()!= null) {
-                    int seleccio = (int) JOptionPane.showOptionDialog(menuDestiVista.getFrame(),"Selecciona un mètode","Desar destí",
+                if (ControladorPrincipal.getDestiActual() != null) {
+                    int seleccio = JOptionPane.showOptionDialog(menuDestiVista.getFrame(), "Selecciona un mètode", "Desar destí",
                             JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
-                            null,new Object[]{"XML","Serial"},"XML");//opció 0 o 1
-                   
-                    
-                    
+                            null, new Object[]{"XML", "Serial"}, "XML");//opció 0 o 1
+                    //crear objecte gestorPersistencia per guardar fitxer.
+                    GestorPersistencia gestorPersistencia = new GestorPersistencia();
+                    switch (seleccio) {
+                        case 0:
+                            try {
+                                gestorPersistencia.desarDesti("XML", "fitxerXML", ControladorPrincipal.getDestiActual());
+                            } catch (GestioExcursionsExcepcio e) {
+                                throw new GestioExcursionsExcepcio("GestorXML.desar");
+                            }
+                            break;
+                        case 1:
+                            try {
+                                gestorPersistencia.desarDesti("Serial", "fitxerSerial", ControladorPrincipal.getDestiActual());
+                            } catch (GestioExcursionsExcepcio e) {
+                                throw new GestioExcursionsExcepcio("GestioSerial.desar");
+                            }
+                            break;
+                        default:
+                            menuDestiVista.getFrame().setVisible(true);
+                            JOptionPane.showMessageDialog(menuDestiVista.getFrame(), "Error desconegut");
+                            break;
+                    }
                 } else {
                     menuDestiVista.getFrame().setVisible(true);
                     JOptionPane.showMessageDialog(menuDestiVista.getFrame(), "Abans s'ha de seleccionar un destí");
                 }
-
                 break;
-
         }
 
     }
-
     private void seleccionarDesti() {
 
         String[] nomDesti = new String[ControladorPrincipal.getPosicioDestins()];
