@@ -1,5 +1,9 @@
 package excepcions;
 
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import vista.MenuDestiVista;
+
 /**
  *
  * @author fta

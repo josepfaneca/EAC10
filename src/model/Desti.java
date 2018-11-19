@@ -35,7 +35,7 @@ public class Desti implements Component, Serializable {
      properCodi amb el següent codi a assignar.
      */
     public Desti(String pNom, String pContinent) {
-        codi = properCodi;
+        codi = properCodi;//si es carrega un desti des d'un fitxer, repeteix codis
         properCodi++;
         nom = pNom;
         continent = pContinent;
@@ -54,7 +54,7 @@ public class Desti implements Component, Serializable {
     public int getCodi() {
         return codi;
     }
-
+    
     public void setCodi(int codi) {
         this.codi = codi;
     }
@@ -65,6 +65,10 @@ public class Desti implements Component, Serializable {
 
     public static void setProperCodi() {
         properCodi++;
+    }
+    
+    public static void setProperCodiRestar() {
+        properCodi--;
     }
 
     public String getNom() {

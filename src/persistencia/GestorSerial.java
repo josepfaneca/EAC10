@@ -15,6 +15,15 @@ import java.io.ObjectInputStream;
 public class GestorSerial implements ProveedorPersistencia {
 
     private Desti desti;
+    
+    public Desti getDesti(){
+        return desti;
+    }
+
+    public void setDesti(Desti desti) {
+        this.desti = desti;
+    }
+    
 
     /**
      *
@@ -75,4 +84,8 @@ public class GestorSerial implements ProveedorPersistencia {
             throw new GestioExcursionsExcepcio("GestioSerial.carregar");
         }
     }
+    
+    
+    
+    
 }
