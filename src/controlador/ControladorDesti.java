@@ -104,14 +104,15 @@ public class ControladorDesti implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        /*Accions per al menú:
-        S'ha de cridar a bifurcaOpcio segons l'opció premuda. Penseu que 
-        * l'opció es correspon amb
-        la posició que el botó ocupa a l'array de botons de menuDestiVista
-        També, heu d'actualitzar la propietat opcioSelec 
-        * (amb l'opció que ha premut l'usuari)
+
+        /**
+         * TODO Accions per al menú: S'ha de cridar a bifurcaOpcio segons
+         * l'opció premuda. Penseu que l'opció es correspon amb la posició que
+         * el botó ocupa a l'array de botons de menuDestiVista També, heu
+         * d'actualitzar la propietat opcioSelec (amb l'opció que ha premut
+         * l'usuari)
+         *
          */
-        //Desti[] listDestins = new Desti[ControladorPrincipal.getMAXDESTINS()];
         if (e.getSource() == menuDestiVista.getMenuButtons()[0]) {
             try {
                 bifurcaOpcio(0);
@@ -162,26 +163,24 @@ public class ControladorDesti implements ActionListener {
             }
             opcioSelec = 6;
         }
-        /*
-        Ull! En el cas del formulari i de la llista, com provenen del menú 
-        (els llança el menú de destins), heu de verificar
-        primer que els objectes destiForm o destiLlista no són nulls, 
-        per tal de saber si podeu comparar amb
-        cap botó d'aquests frames
-        
-        Accions per al formulari de destí:
-            ---- DESAR ----
-            Si el botó premut per l'usuari és el botó de desar del formulari de destí, llavors
-                Si l'opció seleccionada (al menú de destins) és 1 (alta), llavors  
-                        Es crea un nou objecte Desti amb les dades del formulari
-                        S'afegeix el destí creat a la llista de ControladorPrincipal
-                        Es posa aquest destí com destiActual (de ControladorPrincipal) 
-                        i es canvia l'atribut
-                        opcioSelec a 2
-                Si l'opció seleccionada (al menú de destins) és 3 (modificació), llavors
-                    Nota: no es validen dades amb aquesta opció (per simplificar)
-                    Es modifica l'objecte destí amb les dades del formulari 
-                (penseu que és el destiActual de ControladorPrincipal)
+        /**
+         *
+         * Ull! En el cas del formulari i de la llista, com provenen del menú
+         * (els llança el menú de destins), heu de verificar primer que els
+         * objectes destiForm o destiLlista no són nulls, per tal de saber si
+         * podeu comparar amb cap botó d'aquests frames
+         *
+         * Accions per al formulari de destí: ---- DESAR ---- Si el botó premut
+         * per l'usuari és el botó de desar del formulari de destí, llavors Si
+         * l'opció seleccionada (al menú de destins) és 1 (alta), llavors Es
+         * crea un nou objecte Desti amb les dades del formulari S'afegeix el
+         * destí creat a la llista de ControladorPrincipal Es posa aquest destí
+         * com destiActual (de ControladorPrincipal) i es canvia l'atribut
+         * opcioSelec a 2 Si l'opció seleccionada (al menú de destins) és 3
+         * (modificació), llavors Nota: no es validen dades amb aquesta opció
+         * (per simplificar) Es modifica l'objecte destí amb les dades del
+         * formulari (penseu que és el destiActual de ControladorPrincipal)
+         *
          */
         if (destiForm != null) {
             if (e.getSource() == destiForm.getbDesar()) {
@@ -189,18 +188,18 @@ public class ControladorDesti implements ActionListener {
                     //Es crea un nou objecte Desti amb les dades del formulari
                     Desti nouDesti = new Desti(destiForm.gettNom().getText(),
                             destiForm.gettContinent().getText());
-                            //S'afegeix el destí creat a la llista de ControladorPrincipal
-                            ControladorPrincipal.getDestins()[ControladorPrincipal.getPosicioDestins()] = nouDesti;
-                            //Es posa aquest destí com destiActual
-                            ControladorPrincipal.setDestiActual(ControladorPrincipal.getDestins()[ControladorPrincipal.getPosicioDestins()]);
-                            //avanço a la següent posició de l'array destins de ControladorPrincipal
-                            ControladorPrincipal.setPosicioDestins();
-                            //es canvia l'atribut a opcioSelect a 2
-                            opcioSelec = 2;
-                            //mostrar un missatge SEGONS ELS REQUERIMENTS NO S'HA D'IMPLEMENTAR CAP MISSATGE
-                            destiForm.getFrame().setVisible(true);
-                            JOptionPane.showMessageDialog(destiForm.getFrame(), "S'ha creat un nou desti amb nom: " + destiForm.gettNom().getText());
-                            destiForm.getFrame().setVisible(false);
+                    //S'afegeix el destí creat a la llista de ControladorPrincipal
+                    ControladorPrincipal.getDestins()[ControladorPrincipal.getPosicioDestins()] = nouDesti;
+                    //Es posa aquest destí com destiActual
+                    ControladorPrincipal.setDestiActual(ControladorPrincipal.getDestins()[ControladorPrincipal.getPosicioDestins()]);
+                    //avanço a la següent posició de l'array destins de ControladorPrincipal
+                    ControladorPrincipal.setPosicioDestins();
+                    //es canvia l'atribut a opcioSelect a 2
+                    opcioSelec = 2;
+                    //mostrar un missatge SEGONS ELS REQUERIMENTS NO S'HA D'IMPLEMENTAR CAP MISSATGE
+                    destiForm.getFrame().setVisible(true);
+                    JOptionPane.showMessageDialog(destiForm.getFrame(), "S'ha creat un nou desti amb nom: " + destiForm.gettNom().getText());
+                    destiForm.getFrame().setVisible(false);
                 } else if (opcioSelec == 3) {
                     //Es crea un nou objecte Desti amb les dades del formulari
                     Desti nouDesti = new Desti(destiForm.gettNom().getText(),
@@ -208,7 +207,7 @@ public class ControladorDesti implements ActionListener {
                     //Es modifica l'objecte destí amb les dades del formulari
                     //és el destiActual de ControladorPrincipal
                     nouDesti.setCodi(ControladorPrincipal.getDestiActual().getCodi());//no vull modificar el codi
-                    Desti.setProperCodiRestar();//setter per no córrer posició quan modifico, ja que el constructor ho té implementat
+                    Desti.setProperCodiRestar();//setter per no córrer posició quan modifico
                     int posiDestiMod = 0;
                     //cercar la posició del Destí a modificar en l'array de ControladorPrincipal
                     for (int i = 0; i < ControladorPrincipal.getDestins().length; i++) {
@@ -298,7 +297,8 @@ public class ControladorDesti implements ActionListener {
                 break;
 
             case 5: //carregar
-                /*
+            /**
+             * 
             TODO
             Es mostra un dialog (JOptionPane.showOptionDialog) amb botons, on cadascun d'ells és un mètode de càrrega 
             (propietat a Controlador Principal: ara XML i Serial)
@@ -346,7 +346,6 @@ public class ControladorDesti implements ActionListener {
                                     case 0://Si l'usuari accepta, llavors es posa el nouDesti 
                                         //al vector a la mateixa posició on s'havia trobat aquest codi
                                         ControladorPrincipal.getDestins()[comprovarDesti(nouDesti.getCodi())] = nouDesti;
-                                        ControladorPrincipal.setPosicioDestins();
                                         break;
                                     case 1:
                                         //s'ha triat cancelar
@@ -359,6 +358,7 @@ public class ControladorDesti implements ActionListener {
                                     //es suposa que hi ha un fitxer xml creat
                                     //S'afegeix el nouDesti al vector de destins a la darrera posició
                                     ControladorPrincipal.getDestins()[ControladorPrincipal.getPosicioDestins()] = nouDesti;
+                                    Desti.setProperCodi();//córrer un codi, així evitar duplicitat
                                     ControladorPrincipal.setPosicioDestins();
                                     //Es mostra un missatge confirmant l'addició (JOptionPane.showMessageDialog)
                                     JOptionPane.showMessageDialog(menuDestiVista.getFrame(), "S'ha addicionat el destí "
@@ -390,7 +390,6 @@ public class ControladorDesti implements ActionListener {
                                     case 0://Si l'usuari accepta, llavors es posa el nouDesti 
                                         //al vector a la mateixa posició on s'havia trobat aquest codi
                                         ControladorPrincipal.getDestins()[comprovarDesti(nouDestiSerial.getCodi())] = nouDestiSerial;
-                                        ControladorPrincipal.setPosicioDestins();
                                         break;
                                     case 1:
                                         //s'ha triat cancelar
@@ -403,6 +402,7 @@ public class ControladorDesti implements ActionListener {
                                     //es suposa que hi ha un fitxer xml creat
                                     //S'afegeix el nouDesti al vector de destins a la darrera posició
                                     ControladorPrincipal.getDestins()[ControladorPrincipal.getPosicioDestins()] = nouDestiSerial;
+                                    Desti.setProperCodi();
                                     ControladorPrincipal.setPosicioDestins();
                                     //Es mostra un missatge confirmant l'addició (JOptionPane.showMessageDialog)
                                     JOptionPane.showMessageDialog(menuDestiVista.getFrame(), "S'ha addicionat el destí "
